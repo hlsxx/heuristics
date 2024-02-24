@@ -33,21 +33,23 @@ def sinus_func(x):
 
 # Example usage
 total_min = 0
-x_values = [];
-y_values = [];
+x_glob_values = [];
+y_glob_values = [];
 
 for i in range(0, 1000):
-    start_x = np.random.normal(0, 1)
-    x_min, x_values, y_values = hill_climbing(sinus_func, start_x, 0.7, 100)
+    #start_x = np.random.normal(0, 1)
+    x_min, x_values, y_values = hill_climbing(sinus_func, 0, 1.8, 100)
 
-    if x_min < total_min:
+    if x_min > total_min:
         total_min = x_min
+        y_glob_values = y_values
+        x_glob_values = x_values
 
 
 print("Minimum found at x =", total_min)
 
 # Plot the minimum value found against the number of iterations
-plt.plot(range(len(y_values)), y_values, 'ro')
+plt.plot(range(len(y_glob_values)), y_glob_values, 'ro')
 plt.xlabel('Iteration')
 plt.ylabel('Minimum Value')
 plt.show()
@@ -56,7 +58,7 @@ plt.show()
 x = [x / 100 for x in range(-3000, 3000)]
 y = [sinus_func(i) for i in x]
 plt.plot(x, y)
-plt.plot(x_values, y_values, 'ro')
+plt.plot(x_glob_values, y_glob_values, 'ro')
 plt.xlabel('x')
 plt.ylabel('y')
 plt.show()
